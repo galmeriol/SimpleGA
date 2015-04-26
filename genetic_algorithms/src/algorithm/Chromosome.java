@@ -1,16 +1,17 @@
-package Algorithm;
+package algorithm;
 
 import java.util.Arrays;
 
 public class Chromosome {
 	static int defaultGeneLength = 0;
 	private static String encryptedMessage = "";
-	//Using alphabet and space character as a allele
+	//Alel tanımlamaları için alfabeyi kullanır
 	public static String[] alphabet = {"A", "B", "C", "D","E","F","G","H","I","J","K","L","M","N",
 								"O","P","Q", "R","S","T","U","V","W","X","Y","Z", " "};
     private int[] genes = new int[defaultGeneLength];
     private int fitness = 0;
-    // Check if the letter is exist
+    /* Mutasyon ve crossing-over için aynı karakterlerin aynı işlemden 
+     * geçmesini sağlayan fonksiyon*/
     public static int check(int index){
     	String curr = getEncryptedMessage().substring(index, index + 1);
 		for (int i = 0; i < index; i++) {
@@ -20,7 +21,7 @@ public class Chromosome {
 		}
 		return -1;
 	}
-    // Create a random chromosome 
+    // Rastgele kromozom oluşturur
     public void generateChromosome() {
         for (int i = 0; i < size(); i++) {
             int gene = (int) Math.round(Math.random() * 26);
@@ -34,7 +35,7 @@ public class Chromosome {
 
     /* Getters and setters */
     
-    // create chromosomes with different gene lengths
+    // Kullanıcıdan gelen metine göre kromozom uzunluğu belirlenir
     public static void setDefaultGeneLength(int length) {
         defaultGeneLength = length;
     }

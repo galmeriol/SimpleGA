@@ -1,4 +1,4 @@
-package Algorithm;
+package algorithm;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,15 +6,12 @@ import java.util.List;
 public class Population {
 	Chromosome[] chromosomes;
 	public String encryptedMessage = "";
-    /*
-     * Constructors
-     */
-    // Create a chromosome population
+   
+    // Popülasyon oluştur
     public Population(int populationSize, boolean initialise) {
         chromosomes = new Chromosome[populationSize];
-        // Initialise population with randomly created chromosomes
+        // Eğer popülasyon ilk popülasyonsa random popülasyon oluşturur
         if (initialise) {
-            // Loop and create chromosomes
             for (int i = 0; i < size(); i++) {
                 Chromosome newChromosome = new Chromosome();
                 newChromosome.generateChromosome();
@@ -27,10 +24,9 @@ public class Population {
     public Chromosome getIndividual(int index) {
         return chromosomes[index];
     }
-
+    // Kromozom popülasyonundan çözüme en yakın kromozom döner
     public Chromosome getFittest() {
         Chromosome fittest = chromosomes[0];
-        // Loop through chromosomes to find fittest in population
         for (int i = 0; i < size(); i++) {
             if (fittest.getFitness() > getIndividual(i).getFitness()) {
                 fittest = getIndividual(i);
@@ -38,18 +34,17 @@ public class Population {
         }
         return fittest;
     }
+    
+    // Elitism ile belirtilen ayrıcalıklı kromozom sayısı kadar kromozom döner
+    // Bunu yaparken kromozomları en uyumlular başta olacak şekilde sıralar
     public List<Chromosome> getFittest(int size) {
-        // Loop through chromosomes to find fittest set of chromosomes in given size
-    	// For isolated chromosomes
         return Arrays.asList(doInsertionSort(chromosomes)).subList(0, size);
     }
-    /* Public methods */
-    // Get population size
+    
     public int size() {
         return chromosomes.length;
     }
 
-    // Save chromosome
     public void saveChromosome(int index, Chromosome chr) {
         chromosomes[index] = chr;
     }
@@ -59,7 +54,7 @@ public class Population {
 			chromosomes[i] = chromosome;
 		}
     }
-    // Sort for deciding the fittest chromosome set in given size
+
     public static Chromosome[] doInsertionSort(Chromosome[] input){
     	Chromosome temp;
     	for (int i = 1; i < input.length; i++) {
